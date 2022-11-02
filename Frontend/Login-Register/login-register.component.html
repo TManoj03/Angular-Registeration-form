@@ -1,0 +1,129 @@
+<div class="container my-5 w-50 bg-light rounded shadow">
+	<div class="">
+		<div class="card-body"> 
+			<nav>
+				<div class="nav nav-pills nav-justified">
+					<a href="#nav-login" id="login" data-toggle="tab" role="tab" class="nav-link  nav-item active">User Login</a>
+					<a href="#nav-admin" id="admin" data-toggle="tab" role="tab" class="nav-link  nav-item">Admin Login</a>
+					<a href="#nav-register" id="register" data-toggle="tab" role="tab" class="nav-link nav-item ">Register</a>
+				</div>
+			</nav>
+			<div class="tab-content">
+				<div class="tab-pane" id="nav-register">
+					<div class="m-3">
+						<h2 class="text-uppercase py-3 bg-warning rounded text-center mb-3 text-white">User Registeration</h2>
+						<form
+							action=""
+					        #f="ngForm"
+					        novalidate 
+					        (ngSubmit)="f.form.valid&&onSubmit()">
+							<div class="row">
+								<div class="col-6 ">
+									<label>First Name</label>
+									<input type="text" id="firstName" class="form-control form-control-lg"  name="fname" #fname="ngModel" [(ngModel)]="formdata.fname" required />
+									<span class="text-danger" *ngIf="this.submit&&fname.errors?.['required']">First Name Must Need</span>
+								</div>
+								<div class="col-6">
+									<label>Last Name</label>
+									<input type="text" id="lastName" class="form-control form-control-lg" name="lname" #lname="ngModel" [(ngModel)]="formdata.lname" required />
+									<span class="text-danger" *ngIf="this.submit&&lname.errors?.['required']">Last Name Must Need</span>
+								</div>
+								<div class="col-6">
+									<label>E-mail</label>
+									<input type="email" id="email" class="form-control form-control-lg mt-2" name="email" #email="ngModel" [(ngModel)]="formdata.email" required/>
+									<span class="text-danger" *ngIf="this.submit&&email.errors?.['required']">email Must Need</span>
+								</div>
+								<div class="col-6">
+									<label>Phone Number</label>
+									<input type="text" id="number" class="form-control form-control-lg" name="phone" #phone="ngModel" [(ngModel)]="formdata.phone" required
+									maxlength="10" minlength="10" />
+									<span class="text-danger" *ngIf="this.submit&&phone.errors?.['required']">Phone Number Must Need</span>
+									<span class="text-danger" *ngIf="this.submit&&phone.errors?.['maxlength']">maximum length 8</span>
+									<span class="text-danger" *ngIf="this.submit&&phone.errors?.['minlength']">minimum length 8</span>
+								</div>
+								<div class="col-6">
+									<label>Age</label>
+									<input type="text" id="age" class="form-control form-control-lg" name="age" #age="ngModel" [(ngModel)]="formdata.age" required/>
+									<span class="text-danger" *ngIf="this.submit&&age.errors?.['required']">age Must Need</span>
+								</div>
+								<div class="col-6">
+									<label>Gender</label>
+									<select name="gender" #gender="ngModel" [(ngModel)]="formdata.gender" id="cars" class="form-control" required>
+				  						<option value="Male">Male</option>
+				  						<option value="Female">Female</option>
+										<option value="Others">Others</option>
+									</select>
+									<span class="text-danger" *ngIf="this.submit&&gender.errors?.['required']">Select Gender</span>
+								</div>
+								<div class="col-12">
+									<label>Address</label>
+									<textarea class="form-control form-control-lg" name="address" #address="ngModel" [(ngModel)]="formdata.address" required></textarea>
+									<span class="text-danger" *ngIf="this.submit&&address.errors?.['required']">Addreess Must Need</span>
+								</div>
+								<div class="col-6">
+									<label>Password</label>
+									<input type="Password" id="password" class="form-control form-control-lg" name="pass" #pass="ngModel" [(ngModel)]="formdata.pass" required minlength="8"/>
+									<span class="text-danger" *ngIf="this.submit&&pass.errors?.['required']">password Must Need</span>
+                  					<span class="text-danger" *ngIf="this.submit&&pass.errors?.['minlength']">minimum length 8</span>	
+								</div>
+								<div class="col-6">
+									<label>Cofirm Password</label>
+									<input type="Password" id="cpassword" class="form-control form-control-lg" name="cpass" #cpass="ngModel" [(ngModel)]="formdata.cpass" required minlength="8" />
+									<span class="text-danger" *ngIf="this.submit&&cpass.errors?.['required']">password Must Need</span>
+                  					<span class="text-danger" *ngIf="this.submit&&cpass.errors?.['minlength']">minimum length 8</span>	
+								</div>
+							</div>
+								<input type="submit" (click)="register()" name="" value="Register" class="btn btn-warning mt-3 text-uppercase" (click)="submit=true">
+						</form>
+					</div>
+				</div>
+				<div class="tab-pane  show active" id="nav-login">
+					<div class="m-3">
+						<h2 class="text-uppercase py-3 bg-warning rounded text-center mb-3 text-white">User Login</h2>
+						<form 
+							action=""
+					        #f="ngForm"
+					        novalidate 
+					        (ngSubmit)="f.form.valid&&onSubmit()">
+							<div class="text-field">
+								<label class="form-label">Email</label>
+								<input type="text" id="login-email" class="form-control form-control-lg"  name="email" [(ngModel)]="formdata.email" #email="ngModel"/>
+								<span class="text-danger" *ngIf="this.submit&&email.errors?.['required']">Email Must Need</span>
+							</div>
+							<div class="password-field py-2"> 
+								<label class="form-label" for="lastName">Password</label>
+								<input type="password" id="login-password" class="form-control form-control-lg" name="pass" [(ngModel)]="formdata.pass" #pass="ngModel" required/>
+								<span class="text-danger" *ngIf="this.submit&&pass.errors?.['required']">password Must Need</span>
+                  					<span class="text-danger" *ngIf="this.submit&&pass.errors?.['minlength']">minimum length 8</span>
+							</div>
+							<input type="submit" (click)="login()" (click)="submit=true" value="Login" name="" class="btn w-25 btn-warning mt-3 text-uppercase">
+						</form> 
+					</div>
+				</div>
+				<div class="tab-pane" id="nav-admin">
+					<div class="m-3">
+						<h2 class="text-uppercase py-3 bg-warning rounded text-center mb-3 text-white">Admin Login</h2>
+						<form 
+							action=""
+					        #f="ngForm"
+					        novalidate 
+					        (ngSubmit)="f.form.valid&&onSubmit()">
+							<div class="text-field">
+								<label class="form-label">Email</label>
+								<input type="text" id="login-email" class="form-control form-control-lg"  name="email" [(ngModel)]="formdata.email" #email="ngModel"/>
+								<span class="text-danger" *ngIf="this.submit&&email.errors?.['required']">Email Must Need</span>
+							</div>
+							<div class="password-field py-2"> 
+								<label class="form-label" for="lastName">Password</label>
+								<input type="password" id="login-password" class="form-control form-control-lg" name="pass" [(ngModel)]="formdata.pass" #pass="ngModel" required/>
+								<span class="text-danger" *ngIf="this.submit&&pass.errors?.['required']">password Must Need</span>
+                  					<span class="text-danger" *ngIf="this.submit&&pass.errors?.['minlength']">minimum length 8</span>
+							</div>
+							<input type="submit" (click)="login()" (click)="submit=true" value="Login" name="" class="btn w-25 btn-warning mt-3 text-uppercase">
+						</form> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
